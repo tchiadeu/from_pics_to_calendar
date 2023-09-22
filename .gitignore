@@ -35,3 +35,6 @@
 /config/master.key
 .env*
 keyfile.json
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

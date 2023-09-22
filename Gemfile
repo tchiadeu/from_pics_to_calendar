@@ -81,3 +81,5 @@ gem "dotenv-rails"
 gem "google-cloud-vision"
 
 gem 'google-api-client', require: 'google/apis/calendar_v3'
+
+gem "tailwindcss-rails", "~> 2.0"
