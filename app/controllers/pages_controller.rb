@@ -1,7 +1,20 @@
+# require 'google/apis/calendar_v3'
+
 class PagesController < ApplicationController
   before_action :authenticate_user!
 
-  def home; end
+  def home
+    client = Signet::OAuth2::Client.new(client_options)
+    redirect_to client.authorization_uri.to_s, allow_other_host: true
+  end
+
+  def callback
+    client = Signet::OAuth2::Client.new(client_options)
+    client.code = params[:code]
+    response = client.fetch_access_token!
+    session[:authorization] = response
+    redirect_to new_file_path
+  end
 
   def new_file; end
 
@@ -90,5 +103,40 @@ class PagesController < ApplicationController
     }
 
     File.delete(file_path)
+  end
+
+  def create_event
+    client = Signet::OAuth2::Client.new(client_options)
+    client.update!(session[:authorization])
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+    params[:form_values].each do |index, param|
+      event = Google::Apis::CalendarV3::Event.new(
+        summary: 'Travail',
+        start: Google::Apis::CalendarV3::EventDateTime.new(
+          date_time: DateTime.parse("#{param[:date]}T#{param[:start_hour]}:00+02:00"),
+          time_zone: 'Europe/Paris'
+        ),
+        end: Google::Apis::CalendarV3::EventDateTime.new(
+          date_time: DateTime.parse("#{param[:date]}T#{param[:end_hour]}:00+02:00"),
+          time_zone: 'Europe/Paris'
+        )
+      )
+      service.insert_event('primary', event) unless %w[Repos Fermé].include?(param[:start_hour])
+    end
+    redirect_to root_path
+  end
+
+  private
+
+  def client_options
+    {
+      client_id: ENV['GOOGLE_CLIENT_ID'],
+      client_secret: ENV['GOOGLE_CLIENT_SECRET'],
+      authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
+      token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+      scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
+      redirect_uri: callback_url
+    }
   end
 end

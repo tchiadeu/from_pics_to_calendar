@@ -1,3 +1,8 @@
-<%= @values[:date][0] %>
-<%= @values[:start_hour][0] %>
-<%= @values[:end_hour][0] %>
+<%= form_with(url: 'create_event', method: 'post', multipart: true) do |form| %>
+  <% 7.times do |i| %>
+    <%= form.text_field "form_values[#{i}][date]", value: @values[:date][i-1] %>
+    <%= form.text_field "form_values[#{i}][start_hour]", value: @values[:start_hour][i-1] %>
+    <%= form.text_field "form_values[#{i}][end_hour]", value: @values[:end_hour][i-1] %>
+  <% end %>
+  <%= form.submit "Créer les évènements" %>
+<% end %>

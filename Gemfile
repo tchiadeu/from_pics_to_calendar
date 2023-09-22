@@ -79,3 +79,5 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "dotenv-rails"
 
 gem "google-cloud-vision"
+
+gem 'google-api-client', require: 'google/apis/calendar_v3'
