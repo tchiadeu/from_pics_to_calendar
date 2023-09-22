@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post 'upload', to: 'pages#upload'
   get 'new_event', to: 'pages#new_event'
   post 'create_event', to: 'pages#create_event'
+  get 'callback', to: 'pages#callback', as: 'callback'
 end
