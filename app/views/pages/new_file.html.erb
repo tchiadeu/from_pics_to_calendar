@@ -2,3 +2,6 @@
   <%= form.file_field :image %>
   <%= form.submit "Télécharger" %>
 <% end %>
+
+
+<%= link_to "Déconnexion", destroy_user_session_path, data: {turbo_method: :delete} %>
