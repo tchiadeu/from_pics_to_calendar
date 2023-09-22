@@ -1,3 +1,20 @@
-<div class="h-screen flex flex-col justify-center">
-  <%= render "devise/shared/links" %>
+
+<div class="h-screen flex flex-col gap-5 justify-center items-center">
+  <h1 class="text-3xl text-blue-500 font-bold tracking-tight text-gray-900 sm:text-5xl">From pics to calendar</h1>
+  <div class="flex flex-col sm:flex-row w-full sm:w-4/6 h-4/6 sm:justify-center rounded-md bg-blue-500 border-2 border-solid border-blue-500 overflow-hidden">
+    <div class="sm:w-1/2 sm:h-full h-1/2 flex justify-center items-center relative">
+      <h2 class="reveal-1 text-center sm:w-3/4 leading-normal opacity-0 absolute text-white text-4xl font-semibold">Télécharger votre fichier</h2>
+      <h2 class="reveal-2 text-center sm:w-3/4 leading-normal opacity-0 absolute text-white text-4xl font-semibold">Vérifier les données extraites</h2>
+      <h2 class="reveal-3 text-center sm:w-3/4 leading-normal opacity-0 absolute text-white text-4xl font-semibold">Créer des évènements dans votre agenda</h2>
+      <h2 class="reveal-4 text-center sm:w-3/4 leading-normal opacity-0 absolute text-white text-4xl font-semibold">Let's go</h2>
+    </div>
+    <div class="sm:w-1/2 sm:h-full h-1/2 bg-white flex flex-col justify-center">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+  <footer class="border-t border-gray-100">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 px-6 sm:flex-row lg:px-8">
+      <p class="text-sm leading-7 text-gray-400">&copy; Powered by Kevin TCHIADEU</p>
+    </div>
+  </footer>
 </div>
