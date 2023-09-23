@@ -1,4 +1,5 @@
 <%= form_with(url: 'upload', method: 'post', multipart: true, class: "h-screen flex flex-col justify-center gap-3") do |form| %>
+  <h2 class="my-5 text-3xl text-center font-semibold leading-7 text-blue-500">Récupération du fichier</h2>
   <div class="mt-2 flex justify-center rounded-lg border-2 border-dashed border-blue-500 px-6 py-10">
     <div class="text-center">
       <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -25,5 +26,5 @@
       </div>
     </div>
   </div>
-  <%= form.submit "Etape suivante", class: "mt-5 rounded-md bg-blue-100 px-3.5 py-2.5 text-sm font-semibold text-blue-500 shadow-sm" %>
+  <%= form.submit "Etape suivante", class: "mt-5 rounded-md bg-blue-100 px-3.5 py-2.5 text-lg font-semibold text-blue-500 shadow-sm" %>
 <% end %>
