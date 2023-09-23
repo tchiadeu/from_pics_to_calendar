@@ -101,6 +101,11 @@ class PagesController < ApplicationController
     }
 
     File.delete(file_path)
+    client = Signet::OAuth2::Client.new(client_options)
+    client.update!(session[:authorization])
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+    @google_calendars = service.list_calendar_lists.items.map { |calendar| [calendar.summary, calendar.id] }
   end
 
   def create_event
@@ -120,7 +125,7 @@ class PagesController < ApplicationController
           time_zone: 'Europe/Paris'
         )
       )
-      service.insert_event('primary', event) unless %w[Repos Fermé].include?(param[:start_hour])
+      service.insert_event(params[:calendar], event) unless %w[Repos Fermé].include?(param[:start_hour])
     end
     redirect_to root_path
   end

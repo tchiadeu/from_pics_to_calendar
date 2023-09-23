@@ -1,6 +1,8 @@
 <div class="my-10">
   <h2 class="my-5 text-3xl text-center font-semibold leading-7 text-blue-500">Vérifier les heures indiquées</h2>
   <%= form_with(url: 'create_event', method: 'post', multipart: true) do |form| %>
+    <%= form.label "Sélectionner l'agenda :", class: "mb-2 block text-lg font-semibold text-gray-900" %>
+    <%= form.select :calendar, @google_calendars, {include_blank: true}, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-500" %>
     <% 7.times do |i| %>
       <div class="mt-3 rounded-md border-2 border-dashed border-blue-500 p-4">
         <%= form.label "#{@values[:date][i-1]} :", class: "block text-lg font-semibold text-gray-900" %>
