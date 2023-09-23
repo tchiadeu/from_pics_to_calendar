@@ -127,7 +127,7 @@ class PagesController < ApplicationController
       )
       service.insert_event(params[:calendar], event) unless %w[Repos Fermé].include?(param[:start_hour])
     end
-    redirect_to root_path
+    redirect_to new_file_path
   end
 
   private
