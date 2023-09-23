@@ -1,7 +1,29 @@
-<%= form_with(url: 'upload', method: 'post', multipart: true) do |form| %>
-  <%= form.file_field :image %>
-  <%= form.submit "Télécharger" %>
+<%= form_with(url: 'upload', method: 'post', multipart: true, class: "h-screen flex flex-col justify-center gap-3") do |form| %>
+  <div class="mt-2 flex justify-center rounded-lg border-2 border-dashed border-blue-500 px-6 py-10">
+    <div class="text-center">
+      <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+      </svg>
+      <div class="mt-4 flex text-sm leading-6 text-gray-600">
+        <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-500">
+          <span>Chercher dans la galerie</span>
+          <%= form.file_field :image, id: "file-upload", class: "sr-only" %>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="mt-2 flex justify-center rounded-lg border-2 border-dashed border-blue-500 px-6 py-10">
+    <div class="text-center">
+      <svg viewBox="0 0 512 512" class="mx-auto h-11 w-11 text-gray-300" fill="currentColor">
+        <path d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/>
+      </svg>
+      <div class="mt-4 flex text-sm leading-6 text-gray-600">
+        <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-500">
+          <span>Prendre une nouvelle photo</span>
+          <%= form.file_field :image, id: "file-upload", class: "sr-only", capture: "Camera" %>
+        </label>
+      </div>
+    </div>
+  </div>
+  <%= form.submit "Etape suivante", class: "mt-5 rounded-md bg-blue-100 px-3.5 py-2.5 text-sm font-semibold text-blue-500 shadow-sm" %>
 <% end %>
-
-
-<%= link_to "Déconnexion", destroy_user_session_path, data: {turbo_method: :delete} %>

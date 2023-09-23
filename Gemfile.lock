@@ -108,6 +108,9 @@ GEM
     faraday-net_http (3.0.2)
     faraday-retry (2.2.0)
       faraday (~> 2.0)
+    ffi (1.15.5)
+    font-awesome-sass (6.4.2)
+      sassc (~> 2.0)
     gapic-common (0.20.0)
       faraday (>= 1.9, < 3.a)
       faraday-retry (>= 1.0, < 3.a)
@@ -289,6 +292,8 @@ GEM
     rexml (3.2.6)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.12.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -349,6 +354,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  font-awesome-sass (~> 6.4.2)
   google-api-client
   google-cloud-vision
   importmap-rails
