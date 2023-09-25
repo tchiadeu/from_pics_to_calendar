@@ -1,0 +1,31 @@
+name: Déploiement sur Hostinger
+
+on:
+  push:
+    branches:
+      - webpack
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v2
+
+    - name: Installer Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # Assurez-vous d'utiliser la version appropriée de Node.js
+
+    - name: Installer les dépendances JavaScript
+      run: npm install  # Vous pouvez utiliser `yarn install` si vous préférez yarn
+
+    - name: Compiler les assets avec Webpacker
+      run: bin/webpack
+
+    - name: Installer lftp
+      run: sudo apt-get install -y lftp
+
+    - name: Déploiement sur Hostinger
+      run: |
+        lftp -u ${{ secrets.USERNAME }},${{ secrets.PASSWORD }} -e "mirror -R -e ./public/assets /tchiadeu-project.com ; quit" hostinger.com
