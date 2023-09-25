@@ -3,7 +3,7 @@ name: Déploiement sur Hostinger
 on:
   push:
     branches:
-      - webpack
+      - master
 
 jobs:
   deploy:
