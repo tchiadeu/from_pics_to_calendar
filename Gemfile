@@ -84,3 +84,5 @@ gem 'google-api-client', require: 'google/apis/calendar_v3'
 
 gem "tailwindcss-rails", "~> 2.0"
 gem "font-awesome-sass", "~> 6.4.2"
+
+gem 'pg'
