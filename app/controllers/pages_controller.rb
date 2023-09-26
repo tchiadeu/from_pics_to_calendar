@@ -19,7 +19,7 @@ class PagesController < ApplicationController
   def upload
     if params[:image].present?
       if Rails.env.production?
-        file_path = Rails.root.join('public', 'upload', params[:image].original_filename)
+        file_path = Rails.root.join('public', params[:image].original_filename)
       else
         file_path = Rails.root.join('app', 'assets', 'images', 'upload', params[:image].original_filename)
       end
@@ -34,7 +34,7 @@ class PagesController < ApplicationController
 
   def new_event
     if Rails.env.production?
-      file_path = Rails.root.join('public', 'upload', params[:file_name])
+      file_path = Rails.root.join('public', params[:file_name])
     else
       file_path = Rails.root.join('app', 'assets', 'images', 'upload', params[:file_name])
     end
