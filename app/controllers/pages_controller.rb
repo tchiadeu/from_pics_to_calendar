@@ -18,7 +18,11 @@ class PagesController < ApplicationController
 
   def upload
     if params[:image].present?
-      file_path = Rails.root.join('app', 'assets', 'images', 'upload', params[:image].original_filename)
+      if Rails.env.production?
+        file_path = Rails.root.join('public', 'upload', params[:image].original_filename)
+      else
+        file_path = Rails.root.join('app', 'assets', 'images', 'upload', params[:image].original_filename)
+      end
       File.open(file_path, 'wb') do |file|
         file.write(params[:image].read)
       end
@@ -29,7 +33,11 @@ class PagesController < ApplicationController
   end
 
   def new_event
-    file_path = Rails.root.join('app', 'assets', 'images', 'upload', params[:file_name])
+    if Rails.env.production?
+      file_path = Rails.root.join('public', 'upload', params[:file_name])
+    else
+      file_path = Rails.root.join('app', 'assets', 'images', 'upload', params[:file_name])
+    end
     relative_path = Pathname.new(file_path).relative_path_from(Rails.root).to_s
     client = Google::Cloud::Vision.image_annotator
     response = client.text_detection(image: relative_path)
