@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get 'new_event', to: 'pages#new_event'
   post 'create_event', to: 'pages#create_event'
   get 'callback', to: 'pages#callback', as: 'callback'
+  resources 'photos', only: %i[new create]
 end
