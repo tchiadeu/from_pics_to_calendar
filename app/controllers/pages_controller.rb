@@ -63,8 +63,7 @@ class PagesController < ApplicationController
 
     new_array.each do |line|
       line.each do |element|
-        if element.match?(/\d{2}\/\d{2}\/\d{4}/)
-        elsif element.match?(/\d{2}:\d{2}-\d{2}:\d{2}/)
+        if element.match?(/\d{2}:\d{2}-\d{2}:\d{2}/)
           hours << element
         elsif element == 'Repos' || element == 'Fermé'
           hours << element
@@ -121,7 +120,7 @@ class PagesController < ApplicationController
     client.update!(session[:authorization])
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
-    params[:form_values].each do |index, param|
+    params[:form_values].each do |_index, param|
       event = Google::Apis::CalendarV3::Event.new(
         summary: 'Travail',
         start: Google::Apis::CalendarV3::EventDateTime.new(
