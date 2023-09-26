@@ -11,36 +11,13 @@ class PagesController < ApplicationController
     client.code = params[:code]
     response = client.fetch_access_token!
     session[:authorization] = response
-    redirect_to new_file_path
-  end
-
-  def new_file; end
-
-  def upload
-    if params[:image].present?
-      if Rails.env.production?
-        file_path = Rails.root.join('public', params[:image].original_filename)
-      else
-        file_path = Rails.root.join('app', 'assets', 'images', 'upload', params[:image].original_filename)
-      end
-      File.open(file_path, 'wb') do |file|
-        file.write(params[:image].read)
-      end
-      redirect_to new_event_path(file_name: params[:image].original_filename)
-    else
-      render :new_file, status: :unprocessable_entity
-    end
+    redirect_to new_photo_path
   end
 
   def new_event
-    if Rails.env.production?
-      file_path = Rails.root.join('public', params[:file_name])
-    else
-      file_path = Rails.root.join('app', 'assets', 'images', 'upload', params[:file_name])
-    end
-    relative_path = Pathname.new(file_path).relative_path_from(Rails.root).to_s
+    image = current_user.photo.image.attachment.blob.download
     client = Google::Cloud::Vision.image_annotator
-    response = client.text_detection(image: relative_path)
+    response = client.text_detection(image: image)
     text_descriptions = []
     response.responses.each do |annotation|
       annotation.text_annotations.each do |text_annotation|
@@ -107,7 +84,8 @@ class PagesController < ApplicationController
       end_hour: end_hours
     }
 
-    File.delete(file_path)
+    # File.delete(file_path)
+    image.destroy
     client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
     service = Google::Apis::CalendarV3::CalendarService.new

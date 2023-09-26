@@ -9,7 +9,7 @@ class PhotosController < ApplicationController
     @photo = Photo.new(photo_params)
     @photo.image.attach(params[:image])
     if @photo.save
-      redirect_to new_event_path(file_name: params[:image].original_filename)
+      redirect_to new_event_path
     else
       render :new
     end
