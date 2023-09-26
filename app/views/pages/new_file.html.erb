@@ -1,4 +1,4 @@
-<%= form_with(url: 'upload', method: 'post', multipart: true, class: "h-screen flex flex-col justify-center gap-3") do |form| %>
+<%= form_with(model: @photo, class: "h-screen flex flex-col justify-center gap-3") do |form| %>
   <h2 class="my-5 text-3xl text-center font-semibold leading-7 text-blue-500">Récupération du fichier</h2>
   <div class="mt-2 flex justify-center rounded-lg border-2 border-dashed border-blue-500 px-6 py-10">
     <div class="text-center">
@@ -8,7 +8,7 @@
       <div class="mt-4 flex text-sm leading-6 text-gray-600">
         <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-500">
           <span>Chercher dans la galerie</span>
-          <%= form.file_field :image, id: "file-upload", class: "sr-only" %>
+          <%= form.file_field :image, as: :file, id: "file-upload", class: "sr-only" %>
         </label>
       </div>
     </div>

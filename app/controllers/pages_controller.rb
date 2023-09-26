@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   end
 
   def new_event
-    image = current_user.photo.image.download
+    image = current_user.photo.image.url
     client = Google::Cloud::Vision.image_annotator
     response = client.text_detection(image: image)
     text_descriptions = []
@@ -84,7 +84,8 @@ class PagesController < ApplicationController
       end_hour: end_hours
     }
 
-    image.destroy
+    current_user.photo.image.purge
+    current_user.photo.destroy
     client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
     service = Google::Apis::CalendarV3::CalendarService.new

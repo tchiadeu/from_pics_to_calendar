@@ -8,7 +8,7 @@
       <div class="mt-4 flex text-sm leading-6 text-gray-600">
         <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-500">
           <span>Chercher dans la galerie</span>
-          <%= form.file_field :image, id: "file-upload", class: "sr-only" %>
+          <%= form.file_field :image, as: :file, id: "file-upload", class: "sr-only" %>
         </label>
       </div>
     </div>

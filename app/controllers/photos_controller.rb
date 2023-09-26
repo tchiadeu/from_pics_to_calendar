@@ -8,7 +8,6 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(photo_params)
     @photo.user = current_user
-    @photo.image.attach(params[:image])
     if @photo.save
       redirect_to new_event_path
     else
