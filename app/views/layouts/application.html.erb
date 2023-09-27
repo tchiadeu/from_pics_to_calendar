@@ -12,10 +12,9 @@
   </head>
 
   <body>
-    <div class="smartphone-content">
-      <main class="container mx-auto px-5">
-        <%= yield %>
-      </main>
-    </div>
+    <main class="container mx-auto px-5">
+      <%= yield %>
+    </main>
+    <%= render "shared/flashes" %>
   </body>
 </html>

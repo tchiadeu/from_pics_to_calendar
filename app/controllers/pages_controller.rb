@@ -112,6 +112,7 @@ class PagesController < ApplicationController
       )
       service.insert_event(params[:calendar], event) unless %w[Repos Fermé].include?(param[:start_hour])
     end
+    flash[:notice] = 'Votre calendrier a bien été mis à jour'
     redirect_to new_photo_path
   end
 
