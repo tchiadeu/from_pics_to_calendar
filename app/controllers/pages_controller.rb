@@ -42,7 +42,7 @@ class PagesController < ApplicationController
       line.each do |element|
         if element.match?(/\d{2}:\d{2}-\d{2}:\d{2}/)
           hours << element
-        elsif element == 'Repos' || element == 'Fermé'
+        elsif %w[Repos Fermé].include?(element)
           hours << element
         elsif element.match?(/\d{2}/) && !element.match?(/\d{2}:/)
           hours << element
@@ -112,7 +112,7 @@ class PagesController < ApplicationController
       )
       service.insert_event(params[:calendar], event) unless %w[Repos Fermé].include?(param[:start_hour])
     end
-    redirect_to new_file_path
+    redirect_to new_photo_path
   end
 
   private
