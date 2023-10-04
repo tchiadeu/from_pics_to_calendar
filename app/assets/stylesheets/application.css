@@ -20,39 +20,6 @@
   display: none;
 }
 
-.reveal-1 {
-  animation: reveal 3s ease-in-out forwards;
-}
-
-.reveal-2 {
-  animation: reveal 3s ease-in-out forwards;
-  animation-delay: 3s;
-}
-
-.reveal-3 {
-  animation: reveal 3s ease-in-out forwards;
-  animation-delay: 6s;
-}
-
-.reveal-4 {
-  animation: last-reveal 1.5s ease-in-out forwards;
-  animation-delay: 9s;
-}
-
-@keyframes reveal {
-  0% {
-    opacity: 0;
-  } 50% {
-    opacity: 1;
-  } 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes last-reveal {
-  0% {
-    opacity: 0;
-  } 100% {
-    opacity: 1;
-  }
+.smartphone {
+  height: 50vh;
 }

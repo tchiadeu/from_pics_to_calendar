@@ -2,7 +2,7 @@
   <%- resource_class.omniauth_providers.each do |provider| %>
     <%=
       button_to omniauth_authorize_path(resource_name, provider),
-      class: "mx-auto flex items-center justify-center w-fit overflow-hidden gap-2 bg-blue-500 rounded-md shadow-lg border border-solid border-blue-500",
+      class: "flex items-center justify-center w-fit overflow-hidden gap-2 bg-blue-500 rounded-md shadow-lg border border-solid border-blue-500 hover:scale-110",
       data: { turbo: false } do
     %>
       <%= image_tag "google.svg", class: "flex justify-center p-3 bg-white" %>
