@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="demo"
 export default class extends Controller {
-  static targets = [ "landing", "demo", "smartphones", "buttons" ]
+  static targets = [ "landing", "demo", "smartphones", "buttons", "registration" ]
 
   landingHeight = 60
   demoOpacity = 0
@@ -61,6 +61,46 @@ export default class extends Controller {
             }, 50)
           }
         }, 30)
+      }
+    }, 50)
+  }
+
+  demoFromRegister(event) {
+    event.preventDefault()
+    let opacity = 100
+    let interval = setInterval(() => {
+      opacity -= 10
+      this.registrationTarget.style.opacity = opacity / 100
+      if (opacity <= 0) {
+        clearInterval(interval)
+        this.registrationTarget.classList.add("hidden")
+        this.demoTarget.classList.remove("hidden")
+        let demoInterval = setInterval(() => {
+          this.demoOpacity += 10
+          this.demoTarget.style.opacity = this.demoOpacity / 100
+          if (this.demoOpacity >= 100) {
+            clearInterval(demoInterval)
+          }
+        }, 50)
+      }
+    }, 50)
+  }
+
+  closeDemoFromRegister() {
+    let opacity = 100
+    let interval = setInterval(() => {
+      opacity -= 10
+      this.demoTarget.style.opacity = opacity / 100
+      if (opacity <= 0) {
+        clearInterval(interval)
+        this.demoTarget.classList.add("hidden")
+        this.registrationTarget.classList.remove("hidden")
+        let registrationInterval = setInterval(() => {
+          this.registrationTarget.style.opacity = this.demoOpacity / 100
+          if (this.demoOpacity >= 100) {
+            clearInterval(registrationInterval)
+          }
+        }, 50)
       }
     }, 50)
   }

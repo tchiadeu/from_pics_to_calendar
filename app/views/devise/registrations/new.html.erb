@@ -1,5 +1,5 @@
-<div class="flex flex-col justify-center h-screen">
-  <main class="mx-auto w-full max-w-7xl px-6">
+<div data-controller="demo" class="flex flex-col justify-center h-screen">
+  <main data-demo-target="registration" class="mx-auto w-full max-w-7xl px-6">
     <div class="mx-auto max-w-2xl text-center">
       <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">L'inscription n'est pas autorisée</h1>
       <p class="mt-4 text-base leading-7 text-gray-600 sm:mt-6 sm:text-lg sm:leading-8">Pour toute demande spécifique, contactez le développeur.</p>
@@ -44,9 +44,35 @@
             </svg>
           </div>
         </li>
+        <li class="relative flex gap-x-6 py-3 items-center">
+          <div class="flex h-10 w-10 flex-none items-center justify-center rounded-lg shadow-sm ring-1 ring-gray-900/10">
+            <%= image_tag "youtube.svg", class: "h-6 w-6" %>
+          </div>
+          <div class="flex-auto">
+            <h3 class="text-sm font-semibold leading-6 text-gray-900">
+              <button data-action="click->demo#demoFromRegister">
+                <span class="absolute inset-0" aria-hidden="true"></span>
+                Démonstration
+              </button>
+            </h3>
+            <p class="mt-2 text-sm leading-6 text-gray-600">Voir la vidéo de démonstration</p>
+          </div>
+          <div class="flex-none self-center">
+            <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </li>
+
       </ul>
     </div>
   </main>
+  <div data-demo-target="demo" class="relative mt-10 opacity-0 flex justify-center hidden">
+    <%= image_tag "iphone.svg", class: "iphone" %>
+    <video data-action="ended->demo#closeDemoFromRegister" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 video" autoplay muted playsinline>
+      <source src="<%= asset_path 'demo.mp4' %>" type="video/mp4">
+    </video>
+  </div>
   <footer class="border-t border-gray-100 py-6">
     <div class="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 px-6 sm:flex-row lg:px-8">
       <p class="text-sm leading-7 text-gray-400">&copy; Powered by Kevin TCHIADEU</p>
