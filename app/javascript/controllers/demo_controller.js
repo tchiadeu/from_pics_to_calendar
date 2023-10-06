@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="demo"
 export default class extends Controller {
-  static targets = [ "landing", "demo", "smartphones", "buttons", "registration" ]
+  static targets = [ "landing", "demo", "smartphones", "buttons", "registration", "description", "footer", "steps" ]
 
   landingHeight = 60
   demoOpacity = 0
@@ -12,12 +12,22 @@ export default class extends Controller {
     event.preventDefault()
     let smartphonesInterval = setInterval(() => {
       this.smartphonesOpacity -= 10
+      if (window.innerWidth < 640) {
+        this.descriptionTarget.style.opacity = this.smartphonesOpacity / 100
+        this.footerTarget.style.opacity = this.smartphonesOpacity / 100
+        this.stepsTarget.style.opacity = this.smartphonesOpacity / 100
+      }
       this.smartphonesTarget.style.opacity = this.smartphonesOpacity / 100
       this.buttonsTarget.style.opacity = this.smartphonesOpacity / 100
       if (this.smartphonesOpacity <= 0) {
         clearInterval(smartphonesInterval)
+        if (window.innerWidth < 640) {
+          this.descriptionTarget.classList.add("hidden")
+          this.footerTarget.classList.add("hidden")
+          this.stepsTarget.classList.add("hidden")
+        }
         this.buttonsTarget.classList.add("hidden")
-        this.smartphonesTarget.classList.add("hidden")
+        this.smartphonesTarget.classList.add("sm:hidden")
         let landingInterval = setInterval(() => {
           this.landingHeight += 5
           this.landingTarget.style.height = this.landingHeight + "vh"
@@ -49,12 +59,22 @@ export default class extends Controller {
           this.landingTarget.style.height = this.landingHeight + "vh"
           if (this.landingHeight <= 60) {
             clearInterval(landingInterval)
-            this.smartphonesTarget.classList.remove("hidden")
+            this.smartphonesTarget.classList.remove("sm:hidden")
             this.buttonsTarget.classList.remove("hidden")
+            if (window.innerWidth < 640) {
+              this.descriptionTarget.classList.remove("hidden")
+              this.footerTarget.classList.remove("hidden")
+              this.stepsTarget.classList.remove("hidden")
+            }
             let smartphonesInterval = setInterval(() => {
               this.smartphonesOpacity += 10
               this.smartphonesTarget.style.opacity = this.smartphonesOpacity / 100
               this.buttonsTarget.style.opacity = this.smartphonesOpacity / 100
+              if (window.innerWidth < 640) {
+                this.descriptionTarget.style.opacity = this.smartphonesOpacity / 100
+                this.footerTarget.style.opacity = this.smartphonesOpacity / 100
+                this.stepsTarget.style.opacity = this.smartphonesOpacity / 100
+              }
               if (this.smartphonesOpacity >= 100) {
                 clearInterval(smartphonesInterval)
               }
