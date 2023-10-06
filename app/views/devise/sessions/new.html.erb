@@ -1,20 +1,26 @@
-<div class="w-full h-screen">
-  <div class="relative h-3/5 w-full bg-blue-500 flex flex-col items-center mb-32">
-    <h1 class="my-5 font-bold text-white text-5xl">Snap & Sync Calendar</h1>
-    <h3 class="font-semibold text-white text-lg">Dites adieu aux horaires papier : prenez une photo et ajoutez-les automatiquement à votre agenda Google.</h3>
-    <div class="flex gap-20 absolute -bottom-20">
-      <%= image_tag "smartphone_1.png", class: "smartphone" %>
-      <%= image_tag "smartphone_2.png", class: "smartphone" %>
-      <%= image_tag "smartphone_3.png", class: "smartphone" %>
+  <div data-controller="demo" class="w-full h-screen">
+    <div data-demo-target="landing" class="relative h-3/5 w-full bg-blue-500 flex flex-col items-center mb-32">
+      <h1 class="my-5 font-bold text-white text-5xl">Snap & Sync Calendar</h1>
+      <h3 class="font-semibold text-white text-lg">Dites adieu aux horaires papier : prenez une photo et ajoutez-les automatiquement à votre agenda Google.</h3>
+      <div data-demo-target="smartphones" class="flex gap-20 absolute -bottom-20">
+        <%= image_tag "smartphone_1.png", class: "smartphone" %>
+        <%= image_tag "smartphone_2.png", class: "smartphone" %>
+        <%= image_tag "smartphone_3.png", class: "smartphone" %>
+      </div>
+      <div data-demo-target="demo" class="relative mt-10 bg-blue-500 opacity-0 flex justify-center hidden">
+        <%= image_tag "iphone.svg", class: "iphone" %>
+        <video data-action="ended->demo#closeVideo" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 video" autoplay muted playsinline>
+          <source src="<%= asset_path 'demo.mp4' %>" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <div data-demo-target="buttons" class="flex justify-center gap-10">
+      <%= render "devise/shared/links" %>
+      <button data-action="click->demo#showDemo" class="flex items-center justify-center w-fit overflow-hidden gap-2 bg-blue-500 rounded-md shadow-lg border border-solid border-blue-500 hover:scale-110">
+        <%= image_tag "youtube.svg", class: "flex justify-center p-3 bg-white" %>
+        <div class="p-4">
+          <p class="text-white text-lg font-semibold">Voir la démonstration</p>
+        </div>
+      </button>
     </div>
   </div>
-  <div class="flex justify-center gap-10">
-    <%= render "devise/shared/links" %>
-    <button class="flex items-center justify-center w-fit overflow-hidden gap-2 bg-blue-500 rounded-md shadow-lg border border-solid border-blue-500 hover:scale-110">
-      <%= image_tag "youtube.svg", class: "flex justify-center p-3 bg-white" %>
-      <div class="p-4">
-        <p class="text-white text-lg font-semibold">Voir la démonstration</p>
-      </div>
-    </button>
-  </div>
-</div>
